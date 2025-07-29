@@ -61,3 +61,6 @@
 [submodule "coqpyt"]
 	path = coqpyt
 	url = git@github.com:rkthomps/coqpyt
+[submodule "coqpilot-repos/imm"]
+	path = coqpilot-repos/imm
+	url = git@github.com:weakmemory/imm.git
