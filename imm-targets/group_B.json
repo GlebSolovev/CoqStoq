@@ -1,0 +1,176 @@
+{
+    "imm/src/traversal/TraversalConfig.v": [
+        "ar_rf_ppo_loc_rt_I_in_I",
+        "ar_rt_CI_in_I",
+        "msg_rel_issued",
+        "dom_ar_ct_issuable"
+    ],
+    "imm/src/imm/SubExecution.v": [
+        "restrict_threads_bound",
+        "sub_IPROP",
+        "sub_SB"
+    ],
+    "imm/src/hardware/Power.v": [
+        "wf_hbD",
+        "fence_hb_fri",
+        "S_rw",
+        "rw_S"
+    ],
+    "imm/src/imm/CombRelations.v": [
+        "urr_hb_sc_hb_irr",
+        "urr_alt",
+        "furr_hb_sc_hb_irr",
+        "wf_S_tmrD"
+    ],
+    "imm/src/basic/Events.v": [
+        "tid_n_init_ext_sb",
+        "same_lab_u2v_dom_inclusion",
+        "ext_sb_semi_total_r",
+        "same_lab_u2v_dom_trans"
+    ],
+    "imm/src/imm/imm_ppo.v": [
+        "rmw_sb_W_in_ppo",
+        "fwbob_ppo"
+    ],
+    "imm/src/travorder/SimClosure.v": [
+        "sim_clos_dist",
+        "sim_clos_empty"
+    ],
+    "imm/src/basic/Execution.v": [
+        "same_tid_trans",
+        "W_ex_eq_EW_W_ex",
+        "codom_rfi_rfe_empty",
+        "wf_addrE",
+        "wf_depsD",
+        "rf_rmw_sb_minus_sb",
+        "wf_rmw_invf",
+        "detour_transp_rfi"
+    ],
+    "imm/src/hardware/Power_fences.v": [
+        "lwsync_alt",
+        "RW_sb_lwsync_in_lwsync",
+        "wf_fenceD"
+    ],
+    "imm/src/hardware/Power_ppo.v": [
+        "wf_ci0E",
+        "wf_cc0D",
+        "rdw_rbi_in_rbi",
+        "basic_to_transitional",
+        "addrsbW_in_ppo",
+        "wf_helperE",
+        "L_in_union",
+        "wf_ppoD"
+    ],
+    "imm/src/travorder/TlsEventSets.v": [
+        "covered_ta_reserve",
+        "issued_is_ta_propagate_to_G",
+        "issuedW",
+        "issuable_iord_dom_cond",
+        "issued_eq_ta_issue"
+    ],
+    "imm/src/imm/imm_rfppo.v": [
+        "IMM_no_ar_rf_ppo_loc_to_init"
+    ],
+    "imm/src/imm/imm_s.v": [
+        "wf_ar_rfrmw_ctE",
+        "wf_ar_rf_ppo_locE",
+        "wf_ar_rfrmwE",
+        "rfe_rmw_in_ar_ct",
+        "wf_pscE"
+    ],
+    "imm/src/travorder/AuxEE.v": [
+        "furr_E_ENI_cr"
+    ],
+    "imm/src/travorder/TraversalOrder.v": [
+        "eSB_in_sb_sc_ct",
+        "FWBOB_trans",
+        "dom_rel_tls_helper"
+    ],
+    "imm/src/travorder/TlsAux2.v": [
+        "tls_coherent_more"
+    ],
+    "imm/src/basic/Execution_eco.v": [
+        "eco_refl",
+        "coi_coe"
+    ],
+    "imm/src/hardware/Arm.v": [
+        "dob_alt",
+        "deps_in_ctrl_or_dob"
+    ],
+    "imm/src/travorder/EventsTraversalOrder.v": [
+        "dom_detour_rfe_ppo_issuable",
+        "rf_ppo_loc_rt_I_in_I",
+        "msg_rel_issued",
+        "ar_rf_ppo_loc_rt_I_in_I",
+        "dom_c_rel_coverable",
+        "ar_rt_I_in_I",
+        "dom_sw_coverable"
+    ],
+    "imm/src/travorder/IordCoherency.v": [
+        "init_tls_iord_coherent"
+    ],
+    "imm/src/imm/imm_hb.v": [
+        "wf_releaseE",
+        "wf_swD"
+    ],
+    "imm/src/imm/Rel_opt.v": [
+        "F_sw_eq",
+        "rmw_sw_eq"
+    ],
+    "imm/src/imm/imm.v": [
+        "wf_arE"
+    ],
+    "imm/src/basic/ProgToExecutionProperties.v": [
+        "depf_preserves_set_lexpr",
+        "same_lab_u2v_dom_restricted",
+        "istep_eindex_shift",
+        "step_empty_same_E"
+    ],
+    "imm/src/traversal/TraversalConfigAltOld.v": [
+        "otc_dr_ppo_I",
+        "otc_W_bob_I",
+        "otc_tc_fwbob_I"
+    ],
+    "imm/src/travorder/TLSCoherency.v": [
+        "tls_coherent_ext"
+    ],
+    "imm/src/simhelpers/CertCOhelper.v": [
+        "col_trans",
+        "T_I_new_co_I_T"
+    ],
+    "imm/src/imm/imm_s_ppo.v": [
+        "rmw_in_ppo"
+    ],
+    "imm/src/hardware/imm_sToARM.v": [
+        "C_SC",
+        "RMW_COI"
+    ],
+    "imm/src/basic/Receptiveness.v": [
+        "TWF_helper_rmw"
+    ],
+    "imm/src/basic/FinExecution.v": [
+        "fin_exec_full_equiv"
+    ],
+    "imm/src/travorder/SimIordTraversal.v": [
+        "trav_prefix_union_init_tls_coherent"
+    ],
+    "imm/src/imm/imm_bob.v": [
+        "wf_bobE",
+        "wf_fwbobE"
+    ],
+    "imm/src/simhelpers/ViewRelHelpers.v": [
+        "t_rel_fence_step"
+    ],
+    "imm/src/travorder/TlsViewRelHelpers.v": [
+        "t_rel_msg_rel_rfrmw"
+    ],
+    "imm/src/ocamlmm/OCamlToimm_s.v": [
+        "sb_rf_sc_sc"
+    ],
+    "imm/src/c11/C11Toimm_s.v": [
+        "s_imm_consistentimplies_c11_consistent"
+    ],
+    "imm/src/imm/imm_s_hb.v": [
+        "release_rf_rmw_steps"
+    ]
+}

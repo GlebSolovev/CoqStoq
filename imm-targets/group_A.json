@@ -1,0 +1,201 @@
+{
+  "imm/src/traversal/TraversalConfig.v": [
+    "dom_rfe_acq_sb_issuable",
+    "t_acq_covered",
+    "ar_rf_ppo_loc_ct_I_in_I",
+    "W_Rel_sb_loc_I",
+    "issuableE",
+    "sw_covered",
+    "dom_detour_rmwrfi_rfe_acq_sb_issued",
+    "ar_rf_ppo_loc_ct_issuable_in_I",
+    "dom_F_Rel_sb_I_in_C",
+    "dom_detour_rfe_acq_sb_issued",
+    "sc_coverable",
+    "issuedE",
+    "dom_wex_sb_issued",
+    "rf_coverable",
+    "urr_coverable"
+  ],
+  "imm/src/hardware/Power_ppo.v": [
+    "Li_in_L",
+    "rfi_in_ii",
+    "ctrli_in_ctrl",
+    "cc_in_sb",
+    "ii_in_sb",
+    "ctrli_RW_in_ic",
+    "ci_ii_in_ci"
+  ],
+  "imm/src/imm/CombRelations.v": [
+    "t_cur_in_t_acq",
+    "furr_bunion",
+    "wf_urrD",
+    "s_tm_union"
+  ],
+  "imm/src/basic/Execution.v": [
+    "rfi_rmw_in_sb_loc",
+    "deps_in_sb",
+    "ri_union_re",
+    "fri_in_sb",
+    "wf_coiD",
+    "fr_co",
+    "rmw_W_ex",
+    "init_ninit_sb",
+    "re_dom",
+    "wf_rfeD",
+    "co_co",
+    "rfi_in_sb",
+    "wf_friD",
+    "wf_rfeE"
+  ],
+  "imm/src/hardware/immToARMhelper.v": [
+    "WF"
+  ],
+  "imm/src/travorder/TraversalOrder.v": [
+    "iord_irreflexive",
+    "FWBOB_irr",
+    "iord_alt"
+  ],
+  "imm/src/hardware/TSO.v": [
+    "CON_WF"
+  ],
+  "imm/src/travorder/TlsEventSets.v": [
+    "reserved_minus",
+    "issued_minus",
+    "reserved_union",
+    "covered_eq_ta_propagate",
+    "set_minus_empty",
+    "IPROP_in_iord_simpl",
+    "issued_singleton"
+  ],
+  "imm/src/travorder/EventsTraversalOrder.v": [
+    "rfrmw_rt_I_in_I",
+    "dom_sc_covered",
+    "dom_F_Rel_sb_I_in_C",
+    "dom_W_sb_C_in_I",
+    "dom_detour_rfe_acq_sb_issued",
+    "ar_rfrmw_ct_I_in_I",
+    "dom_rfe_acq_sb_issued",
+    "dom_c_rel_covered",
+    "dom_detour_rmwrfi_rfe_acq_sb_issued",
+    "urr_coverable",
+    "ar_rfrmw_ct_CI_in_I",
+    "W_ar_C_in_I",
+    "t_acq_covered",
+    "ar_rfrmw_issuable_in_I"
+  ],
+  "imm/src/imm/imm_s_hb.v": [
+    "loceq_rs",
+    "hb_irr",
+    "sw_in_hb"
+  ],
+  "imm/src/imm/imm_hb.v": [
+    "w_hb_loc_r_in_co_rf",
+    "cr_hb_cr_hb",
+    "w_hb_loc_w_in_co",
+    "release_in_hb_co",
+    "eco_sw",
+    "hb_trans"
+  ],
+  "imm/src/imm/SubExecution.v": [
+    "sub_sw_in",
+    "sub_rfi_in",
+    "sub_rfe_in",
+    "sub_Rel",
+    "sub_val",
+    "restrict_sub",
+    "sub_imm_consistent",
+    "sub_addr_in"
+  ],
+  "imm/src/travorder/TLSCoherency.v": [
+    "init_exec_tls_disjoint"
+  ],
+  "imm/src/basic/RMWinstrProps.v": [
+    "rmw_is_rex_instr_rexmod",
+    "cas_produces_R_ex_instr_rexmod"
+  ],
+  "imm/src/imm/Rel_opt.v": [
+    "fr_eq",
+    "same_loc_eq",
+    "complete_eq",
+    "F_AcqRel_eq"
+  ],
+  "imm/src/basic/Events.v": [
+    "initninit_in_ext_sb",
+    "restr_eq_rel_same_loc",
+    "same_lab_u2v_dom_mod",
+    "same_lab_u2v_is_rlx",
+    "same_lab_u2v_dom_xmod",
+    "same_lab_u2v_is_sc",
+    "ext_sb_tid_init'",
+    "tid_set_dec",
+    "same_label_u2v_trans",
+    "same_lab_u2v_is_acqrel",
+    "same_lab_u2v_dom_loc"
+  ],
+  "imm/src/travorder/AuxEE.v": [
+    "rf_E_ENI",
+    "E_E_trans",
+    "sc_E_ENI"
+  ],
+  "imm/src/imm/imm_s_ppo.v": [
+    "ppo_in_ar_int",
+    "w_ex_acq_sb_w_in_ar_int"
+  ],
+  "imm/src/basic/ProgToExecutionProperties.v": [
+    "step_preserves_instrs"
+  ],
+  "imm/src/basic/Receptiveness.v": [
+    "sim_execution_same_acts"
+  ],
+  "imm/src/hardware/immToPower.v": [
+    "C_EXT_helper08",
+    "rmw_sb_W_in_ppo",
+    "RMW_CTRL_FAIL'"
+  ],
+  "imm/src/imm/imm_ppo.v": [
+    "detour_in_ar_int"
+  ],
+  "imm/src/imm/imm_s.v": [
+    "bob_in_ar",
+    "rf_sb_sc_rt_sb_fwbob_in_ar",
+    "rfrmw_in_im_co"
+  ],
+  "imm/src/jsmm/JSMMToimm_s.v": [
+    "hb_js_in_hb"
+  ],
+  "imm/src/imm/imm_bob.v": [
+    "bob_in_sb",
+    "sb_from_f_in_fwbob",
+    "fwbob_in_sb",
+    "sb_from_f_in_bob",
+    "fwbob_in_bob"
+  ],
+  "imm/src/simhelpers/CertCOhelper.v": [
+    "wf_colE",
+    "col_in_co"
+  ],
+  "imm/src/imm/imm_rfppo.v": [
+    "IMM_ar_rf_ppo_loc_ct_in_ar_ct"
+  ],
+  "imm/src/hardware/immToTSO.v": [
+    "ct_psct"
+  ],
+  "imm/src/traversal/TraversalConfigAltOld.v": [
+    "otc_rfirmw_I"
+  ],
+  "imm/src/ocamlmm/OCamlToimm_s.v": [
+    "sc_scb_pscb"
+  ],
+  "imm/src/traversal/TraversalConfigAlt.v": [
+    "tc_I_ar_rfrmw_I"
+  ],
+  "imm/src/travorder/SimClosure.v": [
+    "ICOHs"
+  ],
+  "imm/src/ldrf/LDRF_Fsc.v": [
+    "ac_irr"
+  ],
+  "imm/src/basic/Execution_eco.v": [
+    "loceq_eco"
+  ]
+}
