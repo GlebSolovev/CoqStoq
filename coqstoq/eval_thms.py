@@ -225,7 +225,8 @@ def compile_file(project: Project, path: Path, timeout: Optional[int]):
 def find_eval_theorems(
     project: Project, path: Path, timeout: Optional[int]
 ) -> list[EvalTheorem]:
-    compile_file(project, path, timeout)
+    # Skip, we suppose `imm` is already built with nix
+    # compile_file(project, path, timeout)
     str_file_path = str(path.resolve())
     str_workspace_path = str(project.workspace.resolve())
     proofs: list[EvalTheorem] = []
