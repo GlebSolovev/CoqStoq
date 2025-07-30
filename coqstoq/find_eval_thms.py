@@ -118,11 +118,11 @@ def find_project_theormes(project: Project, timeout: int) -> TheoremReport:
             errored_files.append(file)
             continue
         except CoqCompileTimeoutError as e:
-            print(f"Compilation timed out for {file}; Error; {e}")
+            print(f"Compilation timed out for {file}; Error: {e}")
             timed_out_files.append(file)
             continue
         except ResponseError as e:
-            print(f"Got Coq-LSP response error for {file}.")
+            print(f"Got Coq-LSP response error for {file}; Error: {e}")
             lsp_errored_files.append(file)
             continue
     return TheoremReport(
@@ -197,7 +197,7 @@ class EvalReport:
             TheoremReport.from_json(json_data["report"]),
         )
 
-TIMEOUT = 120
+TIMEOUT = 240
 
 def create_predefined_coqstoq_theorems():
     reports: list[EvalReport] = []
