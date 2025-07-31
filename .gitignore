@@ -5,3 +5,7 @@
 /scratch
 __pycache__/
 
+# benchmarking `imm`
+coqpilot-theorems/
+coqpilot-theorems*.json
+all_target_theorems.json
