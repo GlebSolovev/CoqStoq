@@ -16,13 +16,6 @@ from pathlib import Path
 from dataclasses import dataclass, asdict
 from coqstoq.eval_thms import Split, EvalTheorem
 
-from coqstoq.predefined_projects import (
-    PREDEFINED_PROJECTS,
-    TEST_SPLIT,
-    VAL_SPLIT,
-    CUTOFF_SPLIT,
-)
-
 
 @dataclass(unsafe_hash=True)
 class TheoremReference:
@@ -55,7 +48,7 @@ def load_reference_list(split: Split, coqstoq_loc: Path) -> list[TheoremReferenc
         return [TheoremReference.from_json(thm) for thm in json.load(fin)]
 
 
-def create_split_list(split: Split, seed: int, target_thms_by_files: dict[str, list[TargetTheorem]]) -> list[TheoremReference]:
+def create_split_list(split: Split, seed: int, target_thms_by_files: dict[str, list[TargetTheorem]] | None) -> list[TheoremReference]:
     # Convert thm_path from "coqpilot-theorems/.../file.json" to ".../file.v"
     def normalize_thm_path(p: Path) -> str:
         normalized = str(p)
@@ -64,30 +57,43 @@ def create_split_list(split: Split, seed: int, target_thms_by_files: dict[str, l
         normalized = normalized.replace(".json", ".v")
         return normalized
 
+    theorem_list: list[TheoremReference] = []
+
+    def add_thm_to_split(idx: int, thm: Any, rel_thm_file_loc: Path, target_thms: list[TargetTheorem] | None):
+        if target_thms is None:
+            theorem_list.append(TheoremReference(rel_thm_file_loc, idx))
+        else:
+            thm_star_pos = int(thm["theorem_start_pos"]["line"])
+            # add `thm` to the split only if there is such target one
+            for target_thm in target_thms:
+                # yes, for some reason Rango generates lines numbers shifted by 1
+                if target_thm.start_pos - 1 == thm_star_pos:
+                    assert not target_thm.added_to_split
+                    theorem_list.append(
+                        TheoremReference(rel_thm_file_loc, idx))
+                    target_thm.added_to_split = True
+
     split_theorems_loc = Path.cwd() / split.thm_dir_name
     assert split_theorems_loc.exists()
-    theorem_list: list[TheoremReference] = []
     for thm_file_loc in split_theorems_loc.glob("**/*.json"):
         assert thm_file_loc.is_relative_to(Path.cwd())
         rel_thm_file_loc = thm_file_loc.relative_to(Path.cwd())
 
-        thm_file = normalize_thm_path(rel_thm_file_loc)
-        target_thms = target_thms_by_files.get(thm_file)
-        if target_thms is None:
-            continue
+        if target_thms_by_files is None:
+            target_thms = None
+        else:
+            thm_file = normalize_thm_path(rel_thm_file_loc)
+            target_thms = target_thms_by_files.get(thm_file)
+            if target_thms is None:
+                continue
 
         with thm_file_loc.open("r") as fin:
             thms = json.load(fin)
             for idx, thm in enumerate(thms):
-                thm_star_pos = int(thm["theorem_start_pos"]["line"])
-                # add `thm` to the split only if there is such target one
-                for target_thm in target_thms:
-                    # yes, for some reason Rango generates lines numbers shifted by 1
-                    if target_thm.start_pos - 1 == thm_star_pos:
-                        assert not target_thm.added_to_split
-                        theorem_list.append(
-                            TheoremReference(rel_thm_file_loc, idx))
-                        target_thm.added_to_split = True
+                add_thm_to_split(idx, thm, rel_thm_file_loc, target_thms)
+
+    if target_thms_by_files is None:
+        return theorem_list
 
     # Check all target theorems are added to split
     all_target_theorems_found = True
@@ -185,12 +191,14 @@ def save_resolved_targets(result: dict[str, list[TargetTheorem]], targets_dir: P
         json.dump(serializable_data, f, indent=2)
 
 
-def create_theorem_list(seed: int, split_name: str, targets_dir: Path):
+def create_theorem_list(seed: int, split_name: str, targets_dir: Path | None):
     split = Split.from_name(split_name)
 
-    target_thms_by_files = load_target_theorems(targets_dir)
-    resolve_start_positions(target_thms_by_files, Path(split.dir_name))
-    save_resolved_targets(target_thms_by_files, targets_dir)
+    target_thms_by_files = None
+    if targets_dir is not None:
+        target_thms_by_files = load_target_theorems(targets_dir)
+        resolve_start_positions(target_thms_by_files, Path(split.dir_name))
+        save_resolved_targets(target_thms_by_files, targets_dir)
 
     thm_list = create_split_list(split, seed, target_thms_by_files)
     with open(split.theorem_list_loc, "w") as fout:
@@ -216,11 +224,13 @@ if __name__ == "__main__":
         help="Name of the split to create a theorem list for.",
     )
     parser.add_argument(
-        "targets_dir",
+        "--targets_dir",
         type=str,
-        help="Path of the directory containing JSON files describing target theorems to include in the split.",
+        required=False,
+        help="Path of the directory containing JSON files describing target theorems to include in the split. If no directory is specified, all available theorems will be included.",
     )
 
     args = parser.parse_args()
 
-    create_theorem_list(SEED, args.split_name, Path(args.targets_dir))
+    targets_dir = None if args.targets_dir is None else Path(args.targets_dir)
+    create_theorem_list(SEED, args.split_name, targets_dir)
