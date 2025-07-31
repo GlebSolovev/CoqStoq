@@ -1,4 +1,5 @@
 from __future__ import annotations
+from itertools import chain
 from typing import Optional, Any
 from dataclasses import dataclass
 from pathlib import Path
@@ -28,15 +29,19 @@ def get_theorem(split: Split, idx: int, coqstoq_loc: Path) -> EvalTheorem:
     return eval_thms[thm_ref.thm_idx]
 
 
-def get_theorem_list(split: Split | str, coqstoq_loc: Path) -> list[EvalTheorem]:
+def get_theorem_list(split: Split | str, coqstoq_loc: Path, only_target_thms: bool = True) -> list[EvalTheorem]:
     if isinstance(split, str):
-        split_val = EvalSplit(f"{split}-repos", f"{split}-theorems") 
+        split_val = EvalSplit(f"{split}-repos", f"{split}-theorems")
     else:
         split_val = split.value
-    eval_thm_dict = get_all_eval_thms(split_val, coqstoq_loc)
-    thm_list = load_reference_list(split_val, coqstoq_loc)
-    eval_thms: list[EvalTheorem] = []
-    for thm_ref in thm_list:
-        eval_thms.append(eval_thm_dict[thm_ref.thm_path][thm_ref.thm_idx])
-    return eval_thms
 
+    eval_thm_dict = get_all_eval_thms(split_val, coqstoq_loc)
+    eval_thms: list[EvalTheorem] = []
+
+    if only_target_thms:
+        thm_list = load_reference_list(split_val, coqstoq_loc)
+        for thm_ref in thm_list:
+            eval_thms.append(eval_thm_dict[thm_ref.thm_path][thm_ref.thm_idx])
+        return eval_thms
+    else:
+        return list(chain.from_iterable(eval_thm_dict.values()))
